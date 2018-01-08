@@ -7,21 +7,22 @@
     <title>tunely</title>
 
     <!-- STYLESHEETS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
     <link rel="stylesheet" href="css/styles.css">
 
     <!-- VENDOR SCRIPTS -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js" integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4" crossorigin="anonymous"></script>
 
     <!-- APPLICATION SCRIPTS -->
     <script src="js/app.js"></script>
   </head>
   <body>
-    <div class="jumbotron">
+    <div class="jumbotron jumbotron-fluid">
       <div class="container">
-        <h1>Welcome to tunely</h1>
-        <p>Your music binder!</p>
+        <h1 class="display-4">Welcome to tunely</h1>
+        <p class="lead">Your music binder!</p>
       </div>
     </div>
 
@@ -34,56 +35,42 @@
       <!-- albums! -->
       <div id='albums'>
 
-
-
-
           <!-- one album -->
           <div class="row album">
 
             <div class="col-md-10 col-md-offset-1">
-              <div class="panel panel-default">
-                <div class="panel-body">
 
-
-                <!-- begin album internal row -->
-                  <div class='row'>
-                    <div class="col-md-3 col-xs-12 thumbnail album-art">
-                      <img src="http://placehold.it/800x800" alt="album image">
-                    </div>
-
-                    <div class="col-md-9 col-xs-12">
-                      <ul class="list-group">
-                        <li class="list-group-item">
-                          <h4 class='inline-header'>Album Name:</h4>
-                          <span class='album-name'>Ladyhawke</span>
-                        </li>
-
-                        <li class="list-group-item">
-                          <h4 class='inline-header'>Artist Name:</h4>
-                          <span class='artist-name'>Ladyhawke</span>
-                        </li>
-
-                        <li class="list-group-item">
-                          <h4 class='inline-header'>Released date:</h4>
-                          <span class='album-releaseDate'>2008, November 18</span>
-                        </li>
-                      </ul>
-                    </div>
-
-                  </div>
-                  <!-- end of album internal row -->
-
-                  <div class='panel-footer'>
-                  </div>
-
+              <!-- begin album internal row -->
+              <div class='row'>
+                <div class="col-md-3 col-xs-12 album-art">
+                  <img class="img-fluid" src="http://placehold.it/800x800" alt="album image">
                 </div>
+
+                <div class="col-md-9 col-xs-12">
+                  <ul class="list-group">
+                    <li class="list-group-item">
+                      <h4 class='inline-header'>Album Name:</h4>
+                      <span class='album-name'>Ladyhawke</span>
+                    </li>
+
+                    <li class="list-group-item">
+                      <h4 class='inline-header'>Artist Name:</h4>
+                      <span class='artist-name'>Ladyhawke</span>
+                    </li>
+
+                    <li class="list-group-item">
+                      <h4 class='inline-header'>Released date:</h4>
+                      <span class='album-releaseDate'>2008, November 18</span>
+                    </li>
+                  </ul>
+                </div>
+
               </div>
+              <!-- end of album internal row -->
+
             </div>
           </div>
           <!-- end one album -->
-
-
-
 
       </div>
     </section>
@@ -93,8 +80,8 @@
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
             <h4 class="modal-title">Create Song</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">&times;</button>
           </div>
           <div class="modal-body">
             <fieldset class='form-horizontal'>
@@ -122,8 +109,8 @@
 
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary" id="saveSong">Save changes</button>
+            <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-success" id="saveSong">Save changes</button>
           </div>
         </div><!-- /.modal-content -->
       </div><!-- /.modal-dialog -->
