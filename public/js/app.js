@@ -36,11 +36,85 @@ sampleAlbums.push({
 
 
 
-
 $(document).ready(function() {
   console.log('app.js loaded!');
 
+
+ $.get("/api/albums", function(albums){
+    console.log(albums);
+    albums.forEach(function(oneAlbum){
+      renderAlbum(oneAlbum);
+    });
+  });
+
+  $('#album-form form').on("submit", function(event){
+  event.preventDefault();
+  var formData = $(this).serialize();
+  $.post('/api/albums', formData, function(album) {
+  renderAlbum(album);
+
+    });
+
+    $(this).trigger("reset");
+  });
+
+
+  $('#albums').on('click', '.add-song', function(e){
+    var id= $(this).parents('.album').data('album-id');
+    $('#songModal').data('album-id', id).modal();
+
+    $('#saveSong').one('click',function(event){
+      event.preventDefault();
+      console.log('tried to submit a new song!');
+      var newSong = {
+        name: $('#songName').val(),
+        trackNumber: Number($('#trackNumber').val())
+      };
+      var listRef = "#songListId"+id;
+      $.post('/api/albums/' + $('#songModal').data('album-id') + '/songs', newSong, function(song){
+        console.log('listRef.html:',$(listRef).html());
+        $(listRef).html($(listRef).html() + " (" + song.trackNumber + ") " + song.name + " -");
+        $('#trackNumber').val('');
+        $('#songName').val('');
+        $('#songModal').modal('hide');
+      });
+    });
+    console.log('id',id);
+  });
+  console.log('app.js loaded!');
 });
+
+function getAlbums(){
+  var myAlbums = $.get('http://localhost:3000/api/albums',function(albumList){
+    albumList.forEach(function(album){
+      renderAlbum(album);
+    });
+  });
+}
+
+
+function buildSongsHTML(songs, albumId){
+  if(!albumId){albumId = "";}
+  var songList = 
+  "  <li class='list-group-item'>" +
+  "   <h4 class='inline-header'>Songs:</h4>" +
+  "     <span id = 'songListId" + albumId + "'> -";
+  if(songs){
+    songs.forEach(function(song){
+      songList += " (" + song.trackNumber + ") " + song.name + " -";
+    });
+   } 
+  songList +=  
+  "     </span>" + 
+  "  </li>";
+  return songList;
+
+
+}
+
+
+
+
 
 
 
@@ -49,6 +123,8 @@ $(document).ready(function() {
 // this function takes a single album and renders it to the page
 function renderAlbum(album) {
   console.log('rendering album:', album);
+
+
 
   var albumHtml =
   "        <!-- one album -->" +
@@ -63,15 +139,15 @@ function renderAlbum(album) {
   "                    <ul class='list-group'>" +
   "                      <li class='list-group-item'>" +
   "                        <h4 class='inline-header'>Album Name:</h4>" +
-  "                        <span class='album-name'>" + "HARDCODED ALBUM NAME" + "</span>" +
+  "                        <span class='album-name'>" + album.name + "</span>" +
   "                      </li>" +
   "                      <li class='list-group-item'>" +
   "                        <h4 class='inline-header'>Artist Name:</h4>" +
-  "                        <span class='artist-name'>" +  "HARDCODED ARTIST NAME"+ "</span>" +
+  "                        <span class='artist-name'>" +  album.artistName+ "</span>" +
   "                      </li>" +
   "                      <li class='list-group-item'>" +
   "                        <h4 class='inline-header'>Released date:</h4>" +
-  "                        <span class='album-releaseDate'>" + "HARDCODED ALBUM RELEASE" + "</span>" +
+  "                        <span class='album-releaseDate'>" + album.releaseDate + "</span>" +
   "                      </li>" +
   "                    </ul>" +
   "                  </div>" +
@@ -82,4 +158,10 @@ function renderAlbum(album) {
 
   // render to the page with jQuery
 
+$("#albums").append(albumHtml);
+
 }
+
+
+
+
